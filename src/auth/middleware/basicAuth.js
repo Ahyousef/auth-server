@@ -1,7 +1,6 @@
 'use strict';
 
 const base64 = require('base-64');
-const { networkInterfaces } = require('os');
 const userCollection = require('../models/user-collection.js');
 
 module.exports = (req, res, next) => {
@@ -9,6 +8,7 @@ module.exports = (req, res, next) => {
         next('Invalid Login')
     }
     else {
+        console.log('valid login')
         const basicAuth = req.headers.authorization.split(' ').pop();
         const [username, pass] = base64.decode(basicAuth).split(':');
         userCollection

@@ -6,7 +6,7 @@ An Express/Node.js based server using a custom “authentication” module that 
 
 Day1: Setup application with express server, setup mongoose database, basic authentication and signup/signin routers
 
-Day2: 
+Day2: Setup GitHub OAuth
 
 Day3: 
 
