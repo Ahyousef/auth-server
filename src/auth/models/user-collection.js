@@ -41,20 +41,39 @@ class userCollection {
         }
         else {
             console.log('user exists');
-            if(this.authenticateBasic(record)){
+            if (this.authenticateBasic(record)) {
                 return record
             }
-            
+
         }
     }
     generateToken(record) {
-        const token = jwt.sign({ username: record.username }, SECRET);
+        const token = jwt.sign({ username: record.username }, SECRET, {expiresIn:900000});
         return token;
     }
     list() {
         let allUsers = userModel.find({})
         return allUsers
-    }
+    };
+    async authenticateToken(token) {
+        try {
+            const tokenObject = jwt.verify(token, SECRET);
+            console.log('TOKEN OBJECT', tokenObject);
+            let userObj;
+            await userModel.findOne({ username: tokenObject.username }, function (err, users) {
+                userObj = users;
+            })
+            if (userObj) {
+                return Promise.resolve(tokenObject);
+            } else {
+                ``
+                return Promise.reject();
+            }
+        }
+        catch (e) {
+            return Promise.reject(e.message);
+        }
+    };
 }
 
 module.exports = new userCollection();

@@ -8,7 +8,7 @@ Day1: Setup application with express server, setup mongoose database, basic auth
 
 Day2: Setup GitHub OAuth
 
-Day3: 
+Day3: Added token authentication and a layer of security (timed out after 15 mins)
 
 Day4: 
 
