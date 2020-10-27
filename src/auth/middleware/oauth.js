@@ -11,17 +11,16 @@ const remoteAPI = 'https://api.github.com/user';
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const API_SERVER = process.env.API_SERVER;
-console.log(userCollection);
 
 module.exports = async (req, res, next) => {
     const code = req.query.code;
-    console.log('1. CODE', code);
+    // console.log('1. CODE', code);
     const access_token = await exchangeCodeForToken(code);
     console.log('2. TOKEN', access_token);
     const remoteUser = await getRemoteUserInfo(access_token);
-    console.log('3. REMOTE USER \n', remoteUser);
+    // console.log('3. REMOTE USER \n', remoteUser);
     const [user, token] = await getUser(remoteUser);
-    console.log('USER & TOKEN', user, token);
+    // console.log('USER & TOKEN', user, token);
     req.user = user;
     req.token = token;
     next();
@@ -57,9 +56,9 @@ async function getUser(remoteUser) {
         username: remoteUser.login,
         password: 'oauthpassword', //this can be anything (it will be hashed)
     };
-    console.log(record);
+    // console.log(record);
     const user = await userCollection.OAuth(record);
-    console.log(user);
+    // console.log(user);
     const token = userCollection.generateToken(user);
     return [user, token];
 }

@@ -5,6 +5,7 @@ const express = require('express')
 const app = express();
 require('dotenv').config()
 const router = require('./auth/router')
+const extraRouter = require('./extra-routes.js')
 const cors = require('cors');
 
 
@@ -14,6 +15,8 @@ const cors = require('cors');
 app.use(express.json());
 app.use(cors())
 app.use(router)
+app.use(extraRouter)
+
 app.use(express.static('./public'));
 // Export
 module.exports = {
