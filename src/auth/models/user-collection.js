@@ -1,7 +1,12 @@
 'use strict'
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+const roles = {
+    user: ['read'],
+    writer: ['read', 'create'],
+    editor: ['read', 'create','update'],
+    admin: ['read', 'create', 'update', 'delete'],
+  };
 
 const SECRET = process.env.SECRET || 'mysecret';
 const userModel = require('./user-model.js');
@@ -48,7 +53,7 @@ class userCollection {
         }
     }
     generateToken(record) {
-        const token = jwt.sign({ username: record.username }, SECRET, {expiresIn:900000});
+        const token = jwt.sign({ username: record.username,capabilities: roles[user.role] }, SECRET, {expiresIn:900000});
         return token;
     }
     list() {
