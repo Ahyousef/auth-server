@@ -22,6 +22,7 @@ class userCollection {
         if (userObj == null) {
             record.password = await bcrypt.hash(record.password, 5);
             const newRecord = new userModel(record);
+            console.log('new user');
             return newRecord.save();
         }
         return Promise.reject('user already exists');
@@ -53,7 +54,7 @@ class userCollection {
         }
     }
     generateToken(record) {
-        const token = jwt.sign({ username: record.username,capabilities: roles[user.role] }, SECRET, {expiresIn:900000});
+        const token = jwt.sign({ username: record.username,capabilities: roles[record.role] }, SECRET, {expiresIn:900000});
         return token;
     }
     list() {
