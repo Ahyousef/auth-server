@@ -6,7 +6,7 @@ const bearer = require('./auth/middleware/bearer-auth.js')
 const acl = require('./auth/middleware/acl.js');
 
 router.get('/secret', bearer, (req,res) => {res.send('Access granted.')} );
-router.get('/read',bearer,acl('create'),readHandler)
+router.get('/read',bearer,acl('read'),readHandler)
 router.post('/add',bearer,acl('create'),createHandler)
 router.put('/change',bearer,acl('update'),updateHandler)
 router.delete('/remove',bearer,acl('delete'),deleteHandler)
