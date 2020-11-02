@@ -10,7 +10,7 @@ Day2: Setup GitHub OAuth
 
 Day3: Added token authentication and a layer of security (timed out after 15 mins)
 
-Day4: 
+Day4: Added roles based control, there is user, writer, editor and admin.
 
 
 ## Setup
@@ -21,10 +21,7 @@ Day4:
 - Unit Tests: npm run test
 - Lint Tests: npm run lint
 
-## Swagger hub
-
-
 
 ## UIM
 (Made with diagrams)
-<!-- ![UIM](./UIM/UIM.jpg) -->
+![UIM](auth-server.png)
